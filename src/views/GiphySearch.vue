@@ -10,6 +10,7 @@
 </template>
 <script>
 import GiphyList from '@/components/GiphyList'
+import NProgress from 'nprogress'
 export default {
   components: {
     GiphyList
@@ -17,25 +18,42 @@ export default {
   data () {
     return {
       buscar: '',
+      cargando: false,
       gifs: []
     }
   },
   methods: {
     search () {
+      this.cargando = false
+      NProgress.start()
+
       this.axios
         .get(this.ePGiphyS + this.buscar)
         .then((res) => {
           this.gifs = res.data.data
           this.buscar = ''
+          this.cargandoGifs()
         })
         .catch((err) => {
           console.error(err)
+          this.cargandoGifs()
         })
+    },
+    cargandoGifs () {
+      this.cargando = true
+      NProgress.done()
     }
+  },
+  created () {
+    NProgress.configure({
+      speed: 200,
+      showSpinner: false
+    })
   }
 }
 </script>
 <style scoped>
+@import "~nprogress/nprogress.css";
 input {
   padding: 10px;
   background-color: white;
@@ -85,5 +103,8 @@ button:hover {
       0 0 92px #fffb00,
       0 0 102px #fffb00,
       0 0 151px #fffb00;
+}
+#nprogress .bar{
+  background: #ffffff !important;
 }
 </style>
