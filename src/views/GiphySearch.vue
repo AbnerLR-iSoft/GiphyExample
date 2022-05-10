@@ -14,8 +14,14 @@ export default {
   },
   methods: {
     search () {
-      console.log(this.buscar)
-      this.buscar = ''
+      this.axios.get(this.ePGiphyS + this.buscar)
+        .then((res) => {
+          console.log(res.data)
+          this.buscar = ''
+        })
+        .catch((err) => {
+          console.error(err)
+        })
     }
   }
 }
