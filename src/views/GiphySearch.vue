@@ -5,11 +5,13 @@
       <input type="search" id="giphy-search" v-model="buscar" />
       <button type="submit" style="--slist: #0cea2d, #0fa">Buscar</button>
     </form>
-    <giphy-list v-if="gifs.length > 0" :gifs="gifs" />
+    <giphy-list v-if="cargando === false" :gifs="gifs" />
+    <app-spinner v-else class="app-spinner" />
   </div>
 </template>
 <script>
 import GiphyList from '@/components/GiphyList'
+import NProgress from 'nprogress'
 export default {
   components: {
     GiphyList
@@ -17,25 +19,48 @@ export default {
   data () {
     return {
       buscar: '',
+      cargando: false,
       gifs: []
     }
   },
   methods: {
     search () {
+      this.cargando = true
+      NProgress.start()
+
       this.axios
         .get(this.ePGiphyS + this.buscar)
         .then((res) => {
           this.gifs = res.data.data
           this.buscar = ''
+          this.cargandoGifs()
         })
         .catch((err) => {
           console.error(err)
+          this.cargandoGifs()
+          this.cargando = null
         })
+    },
+    cargandoGifs () {
+      this.cargando = false
+      NProgress.done()
     }
+  },
+  created () {
+    NProgress.configure({
+      speed: 200,
+      showSpinner: false
+    })
   }
 }
 </script>
 <style scoped>
+@import "~nprogress/nprogress.css";
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   padding: 10px;
   background-color: white;
@@ -85,5 +110,12 @@ button:hover {
       0 0 92px #fffb00,
       0 0 102px #fffb00,
       0 0 151px #fffb00;
+}
+#nprogress .bar{
+  background: #ffffff !important;
+}
+
+.app-spinner {
+  margin: 130px auto;
 }
 </style>
