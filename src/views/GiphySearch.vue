@@ -4,19 +4,24 @@
     <input type="search" id="giphy-search" v-model="buscar">
     <button type="submit">Buscar</button>
   </form>
+  <div v-for="gif in gifs" :key="gif.id">
+    <h3> {{gif.title}} </h3>
+    <img :src="gif.images.original.url" :alt="gif.slug" />
+  </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      buscar: ''
+      buscar: '',
+      gifs: []
     }
   },
   methods: {
     search () {
       this.axios.get(this.ePGiphyS + this.buscar)
         .then((res) => {
-          console.log(res.data)
+          this.gifs = res.data.data
           this.buscar = ''
         })
         .catch((err) => {
