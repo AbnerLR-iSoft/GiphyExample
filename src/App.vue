@@ -1,7 +1,17 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="giphy-search">Giphy Search</router-link>
-  </div>
-  <router-view/>
+    <the-navbar />
+  <main class="container">
+    <router-view/>
+  </main>
 </template>
+<script>
+import TheNavbar from '@/components/TheNavbar'
+export default {
+  components: {
+    TheNavbar
+  }
+}
+</script>
+<style>
+@import "assets/style.css";
+</style>
