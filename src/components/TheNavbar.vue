@@ -26,6 +26,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    margin-top: 28px;
     box-sizing: border-box;
 }
 
@@ -74,7 +75,7 @@ header li {
 
 header a {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 28px;
     padding: 12px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
