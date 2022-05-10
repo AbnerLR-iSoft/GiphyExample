@@ -1,10 +1,12 @@
 <template>
-  <form @submit.prevent="search">
+  <div class="container">
+    <form @submit.prevent="search">
     <label for="giphy-search">Buscar Gif</label>
     <input type="search" id="giphy-search" v-model="buscar">
     <button type="submit">Buscar</button>
   </form>
   <giphy-list v-if="gifs.length > 0" :gifs="gifs"/>
+  </div>
 </template>
 <script>
 import GiphyList from '@/components/GiphyList'

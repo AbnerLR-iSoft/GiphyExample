@@ -1,8 +1,10 @@
 <template>
-  <div v-for="gif in gifs" :key="gif.id">
-    <h3> {{gif.title}} </h3>
-    <img :src="gif.images.original.url" :alt="gif.slug" />
-  </div>
+  <ul>
+    <li v-for="gif in gifs" :key="gif.id">
+     <img :src="gif.images.original.url" :alt="gif.slug" />
+     <h3> {{gif.title}} </h3>
+    </li>
+  </ul>
 </template>
 <script>
 export default {
