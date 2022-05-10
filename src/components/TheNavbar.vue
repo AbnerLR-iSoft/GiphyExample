@@ -6,7 +6,7 @@
     <nav>
       <ul>
         <li><router-link class="neonTextOptions" :to="{name: 'Home'}">Home</router-link></li>
-        <li><router-link class="neonTextOptions" :to="{name: 'GiphySearch'}">Buscador de Gif</router-link></li>
+        <li><router-link class="neonTextOptions" :to="{name: 'GiphySearch'}">Buscar Gif</router-link></li>
       </ul>
     </nav>
   </header>
