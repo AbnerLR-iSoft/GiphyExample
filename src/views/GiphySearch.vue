@@ -4,13 +4,14 @@
     <input type="search" id="giphy-search" v-model="buscar">
     <button type="submit">Buscar</button>
   </form>
-  <div v-for="gif in gifs" :key="gif.id">
-    <h3> {{gif.title}} </h3>
-    <img :src="gif.images.original.url" :alt="gif.slug" />
-  </div>
+  <giphy-list v-if="gifs.length > 0" :gifs="gifs"/>
 </template>
 <script>
+import GiphyList from '@/components/GiphyList'
 export default {
+  components: {
+    GiphyList
+  },
   data () {
     return {
       buscar: '',
