@@ -5,7 +5,8 @@
       <input type="search" id="giphy-search" v-model="buscar" />
       <button type="submit" style="--slist: #0cea2d, #0fa">Buscar</button>
     </form>
-    <giphy-list v-if="gifs.length > 0" :gifs="gifs" />
+    <giphy-list v-if="cargando === false" :gifs="gifs" />
+    <app-spinner v-else class="app-spinner" />
   </div>
 </template>
 <script>
@@ -24,7 +25,7 @@ export default {
   },
   methods: {
     search () {
-      this.cargando = false
+      this.cargando = true
       NProgress.start()
 
       this.axios
@@ -37,10 +38,11 @@ export default {
         .catch((err) => {
           console.error(err)
           this.cargandoGifs()
+          this.cargando = null
         })
     },
     cargandoGifs () {
-      this.cargando = true
+      this.cargando = false
       NProgress.done()
     }
   },
@@ -54,6 +56,11 @@ export default {
 </script>
 <style scoped>
 @import "~nprogress/nprogress.css";
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   padding: 10px;
   background-color: white;
@@ -106,5 +113,9 @@ button:hover {
 }
 #nprogress .bar{
   background: #ffffff !important;
+}
+
+.app-spinner {
+  margin: 130px auto;
 }
 </style>
