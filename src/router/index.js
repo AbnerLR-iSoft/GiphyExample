@@ -5,6 +5,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "Home" */ '@/views/Home')
+  },
+  {
+    path: '/giphy-search',
+    name: 'GiphySearch',
+    component: () => import(/* webpackChunkName: "Home" */ '@/views/GiphySearch')
   }
 ]
 
